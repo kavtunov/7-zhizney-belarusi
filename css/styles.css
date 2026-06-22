@@ -186,6 +186,8 @@ a {
   background: #2f4a35;
   box-shadow: 0 2px 8px rgba(47, 74, 53, 0.22);
   z-index: 0;
+  opacity: 1;
+  pointer-events: none;
   transition: transform 0.4s cubic-bezier(0.34, 1.15, 0.64, 1);
   will-change: transform;
 }

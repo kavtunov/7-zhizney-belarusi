@@ -48,6 +48,27 @@
   }
 
   function initLangToggle() {
+    const LANG_SWITCH_KEY = 'belarus7-lang-switch';
+
+    document.querySelectorAll('.lang-toggle').forEach(function (toggle) {
+      const stored = sessionStorage.getItem(LANG_SWITCH_KEY);
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          if (data.from && data.to && data.from !== data.to) {
+            toggle.dataset.active = data.from;
+            void toggle.offsetWidth;
+            requestAnimationFrame(function () {
+              toggle.dataset.active = data.to;
+            });
+          }
+        } catch (error) {
+          /* ignore invalid session value */
+        }
+        sessionStorage.removeItem(LANG_SWITCH_KEY);
+      }
+    });
+
     document.querySelectorAll('.lang-toggle a.lang-toggle-btn').forEach(function (link) {
       link.addEventListener('click', function (e) {
         if (link.getAttribute('aria-current') === 'page') {
@@ -65,8 +86,14 @@
         }
 
         e.preventDefault();
+        const fromLang = toggle.dataset.active;
         toggle.classList.add('is-switching');
         toggle.dataset.active = targetLang;
+
+        sessionStorage.setItem(LANG_SWITCH_KEY, JSON.stringify({
+          from: fromLang,
+          to: targetLang
+        }));
 
         const href = link.href;
         window.setTimeout(function () {
