@@ -1,34 +1,35 @@
 # 7 жизней Беларуси
 
-Интерактивный цифровой музей истории Беларуси. Статический сайт: HTML, CSS, JavaScript.
+Интерактивный цифровой музей истории Беларуси — статический сайт на HTML, CSS и JavaScript. Две локали: русский (`html/`) и белорусский (`html/be/`).
+
+**Сайт:** [kavtunov.github.io/7-zhizney-belarusi](https://kavtunov.github.io/7-zhizney-belarusi/)
 
 ## Локальный запуск
-
-Откройте `html/index.html` в браузере или поднимите локальный сервер из корня проекта:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Сайт: http://localhost:8080/html/index.html
+Откройте: http://localhost:8080/html/index.html
 
-## GitHub Pages
+## Деплой
 
-1. Создайте пустой репозиторий на GitHub.
-2. Привяжите remote и запушьте:
+Пуш в `main` автоматически публикует сайт через GitHub Actions (`.github/workflows/deploy-pages.yml`).
 
 ```bash
-git remote add origin https://github.com/ВАШ_ЛОГИН/7-zhizney-belarusi.git
-git push -u origin main
+./scripts/push-and-deploy.sh
 ```
 
-3. В репозитории: **Settings → Pages → Build and deployment**
-   - **Source:** Deploy from a branch
-   - **Branch:** `main` / **`/ (root)`**
-   - Save
+Первый раз может понадобиться добавить SSH-ключ на GitHub — скрипт откроет страницу и скопирует ключ.
 
-Через 1–2 минуты сайт будет доступен:
+## Структура
 
-`https://ВАШ_ЛОГИН.github.io/7-zhizney-belarusi/`
+| Папка | Содержимое |
+|-------|------------|
+| `html/` | Страницы (RU) |
+| `html/be/` | Страницы (BE) |
+| `css/` | Стили |
+| `js/` | Скрипты |
+| `img/` | Изображения и видео |
 
-Белорусская версия: `.../html/be/index.html`
+Два 4K-видео (>100 МБ) исключены из git — GitHub их не принимает. На главной используются остальные ролики из `img/`.
