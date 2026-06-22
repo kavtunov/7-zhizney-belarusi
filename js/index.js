@@ -9,9 +9,19 @@
       const src = video.getAttribute('src');
       if (!src) return;
 
+      const poster = video.previousElementSibling;
+      const posterImg = poster && poster.classList.contains('card-poster') ? poster : null;
+
       video.dataset.src = src;
       video.removeAttribute('src');
       video.preload = 'none';
+
+      function revealVideo() {
+        video.classList.add('is-playing');
+        if (posterImg) posterImg.classList.add('is-hidden');
+      }
+
+      video.addEventListener('playing', revealVideo, { once: true });
 
       function loadVideo() {
         if (!video.dataset.src || video.getAttribute('src')) return;

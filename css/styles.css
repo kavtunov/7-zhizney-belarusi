@@ -773,6 +773,7 @@ main.section .prose {
   mix-blend-mode: soft-light;
 }
 
+.card-poster,
 .card-media {
   position: absolute;
   top: 0;
@@ -781,8 +782,25 @@ main.section .prose {
   height: 100%;
   object-fit: cover;
   z-index: -3;
-  opacity: 0.95;
   pointer-events: none;
+}
+
+.card-poster {
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.card-poster.is-hidden {
+  opacity: 0;
+}
+
+.card-media {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card-media.is-playing {
+  opacity: 0.95;
 }
 
 .time-card::after {
@@ -806,7 +824,7 @@ main.section .prose {
   opacity: 0.14;
 }
 
-.time-card:hover .card-media {
+.time-card:hover .card-media.is-playing {
   opacity: 1;
 }
 
