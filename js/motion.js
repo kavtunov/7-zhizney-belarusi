@@ -8,15 +8,7 @@
     });
   }
 
-  function initTimelineCards() {
-    const cards = document.querySelectorAll('.time-card');
-    cards.forEach(function (card, index) {
-      card.style.transitionDelay = (index * 0.08) + 's';
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     showReveals();
-    initTimelineCards();
   });
 })();
