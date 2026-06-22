@@ -1094,25 +1094,72 @@ main.section .prose {
 }
 
 .collect-hero {
+  position: relative;
+  isolation: isolate;
   min-height: 70vh;
   display: grid;
   align-content: center;
   padding-top: 128px;
   padding-bottom: 64px;
   text-align: center;
-  background: linear-gradient(135deg, #f5f1e8 0%, #e7efe2 55%, #dde8f1 100%);
   color: #243119;
   margin-bottom: 32px;
   border: 1px solid rgba(36, 49, 25, 0.08);
   box-shadow: 0 14px 30px rgba(36, 49, 25, 0.08);
+  overflow: hidden;
+}
+
+.collect-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.collect-hero-photo {
+  object-position: center center;
+}
+
+.collect-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.45) 28%,
+    rgba(255, 255, 255, 0.2) 52%,
+    rgba(255, 255, 255, 0.72) 100%
+  );
+}
+
+.collect-hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 85% 65% at 50% 45%,
+    rgba(255, 255, 255, 0.35),
+    transparent 72%
+  );
+}
+
+.collect-hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .collect-hero .eyebrow {
   color: #5f7a57;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
 }
 
 .collect-hero .prose {
-  color: rgba(36, 49, 25, 0.75);
+  color: rgba(36, 49, 25, 0.82);
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
 }
 
 .collect-title {
@@ -1120,6 +1167,7 @@ main.section .prose {
   letter-spacing: -0.03em;
   margin-bottom: 16px;
   color: #243119;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.95), 0 0 24px rgba(255, 255, 255, 0.75);
 }
 
 .collect-finale {
