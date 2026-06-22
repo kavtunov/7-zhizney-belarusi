@@ -438,7 +438,16 @@ a.lang-toggle-btn:hover {
 .time-card,
 .time-card.delay-1,
 .time-card.delay-2,
-.time-card.delay-3 {
+.time-card.delay-3,
+.time-card:hover,
+.time-card:hover .card-wash,
+.time-card:hover .card-media.is-playing {
+  transition-delay: 0s;
+}
+
+.time-card.reveal,
+.time-card.reveal.visible {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   transition-delay: 0s;
 }
 
@@ -723,7 +732,7 @@ main.section .prose {
   border: 1px solid rgba(36, 49, 25, 0.12);
   background: #fff;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   transition-delay: 0s;
   display: flex;
   flex-direction: column;
@@ -767,7 +776,7 @@ main.section .prose {
   bottom: 0;
   opacity: 0.1;
   z-index: -1;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.15s ease;
   transition-delay: 0s;
   background: linear-gradient(135deg, #8bcf7b, transparent 70%);
   mix-blend-mode: soft-light;
@@ -826,6 +835,8 @@ main.section .prose {
 
 .time-card:hover .card-media.is-playing {
   opacity: 1;
+  transition: opacity 0.15s ease;
+  transition-delay: 0s;
 }
 
 .collect-grid {
