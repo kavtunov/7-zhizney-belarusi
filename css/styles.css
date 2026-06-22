@@ -251,66 +251,6 @@ a.lang-toggle-btn:hover {
   pointer-events: none;
 }
 
-.hud {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 200;
-  display: flex;
-  gap: 8px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(36, 49, 25, 0.1);
-  border-radius: 50px;
-  box-shadow: 0 8px 32px rgba(36, 49, 25, 0.08);
-}
-
-.hud-item {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px dashed rgba(36, 49, 25, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.35;
-  transition: opacity 0.4s, transform 0.4s, border-color 0.4s, box-shadow 0.4s;
-}
-
-.hud-item.collected {
-  opacity: 1;
-  border-style: solid;
-  border-color: #5c7d96;
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(92, 125, 150, 0.4);
-}
-
-.hud-item svg {
-  width: 18px;
-  height: 18px;
-}
-
-.hud-label {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  right: 0;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-family: 'Courier New', Courier, monospace;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.3s, transform 0.3s;
-  pointer-events: none;
-}
-
-.hud:hover .hud-label {
-  opacity: 0.8;
-  transform: translateY(0);
-}
-
 .pickup {
   position: relative;
   display: flex;
@@ -726,11 +666,12 @@ main.section .prose {
 
 .time-card {
   position: relative;
+  isolation: isolate;
   padding: 26px 24px;
   min-height: 240px;
   border-radius: 18px;
   border: 1px solid rgba(36, 49, 25, 0.12);
-  background: #fff;
+  background: #f5f3ec;
   overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   transition-delay: 0s;
@@ -754,7 +695,7 @@ main.section .prose {
   line-height: 1.15;
   color: #1f2c19;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   text-shadow: 0 1px 12px rgba(255, 255, 255, 0.95), 0 0 24px rgba(255, 255, 255, 0.7);
 }
 
@@ -764,7 +705,7 @@ main.section .prose {
   font-style: italic;
   color: #3a4338;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   text-shadow: 0 1px 10px rgba(255, 255, 255, 0.95);
 }
 
@@ -775,11 +716,12 @@ main.section .prose {
   right: 0;
   bottom: 0;
   opacity: 0.1;
-  z-index: -1;
+  z-index: 2;
   transition: opacity 0.15s ease;
   transition-delay: 0s;
   background: linear-gradient(135deg, #8bcf7b, transparent 70%);
   mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
 .card-poster,
@@ -790,26 +732,29 @@ main.section .prose {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -3;
   pointer-events: none;
 }
 
 .card-poster {
+  z-index: 1;
   opacity: 1;
   transition: opacity 0.35s ease;
 }
 
 .card-poster.is-hidden {
   opacity: 0;
+  visibility: hidden;
 }
 
 .card-media {
+  z-index: 0;
   opacity: 0;
   transition: opacity 0.35s ease;
 }
 
 .card-media.is-playing {
-  opacity: 0.95;
+  z-index: 1;
+  opacity: 1;
 }
 
 .time-card::after {
@@ -819,7 +764,8 @@ main.section .prose {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -2;
+  z-index: 2;
+  pointer-events: none;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 0%,
@@ -835,8 +781,6 @@ main.section .prose {
 
 .time-card:hover .card-media.is-playing {
   opacity: 1;
-  transition: opacity 0.15s ease;
-  transition-delay: 0s;
 }
 
 .collect-grid {
@@ -1473,13 +1417,6 @@ main.section .prose {
     font-size: 9px;
   }
 
-  .hud {
-    bottom: 16px;
-    right: 16px;
-    padding: 10px 12px;
-    gap: 6px;
-  }
-
   .intro {
     padding-top: 64px;
     padding-bottom: 64px;
@@ -1667,26 +1604,6 @@ main.section .prose {
   .scroll-hint {
     font-size: 9px;
     bottom: 16px;
-  }
-
-  .hud {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    justify-content: center;
-    border-radius: 40px;
-    padding: 8px 10px;
-    gap: 4px;
-  }
-
-  .hud-item {
-    width: 30px;
-    height: 30px;
-  }
-
-  .hud-item svg {
-    width: 14px;
-    height: 14px;
   }
 
   .era-title {

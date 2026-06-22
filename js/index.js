@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  const IS_FILE_PROTOCOL = window.location.protocol === 'file:';
+  const MIN_READY_STATE = IS_FILE_PROTOCOL ? 3 : 4;
+  const READY_TIMEOUT_MS = IS_FILE_PROTOCOL ? 5000 : 12000;
+  const IMMEDIATE_LOAD_COUNT = IS_FILE_PROTOCOL ? 99 : 3;
+
   function initCardVideos() {
     const videos = document.querySelectorAll('.time-grid .card-media');
     if (!videos.length) return;
@@ -12,25 +17,86 @@
       const poster = video.previousElementSibling;
       const posterImg = poster && poster.classList.contains('card-poster') ? poster : null;
 
+      if (posterImg && posterImg.getAttribute('src')) {
+        video.poster = posterImg.getAttribute('src');
+      }
+
       video.dataset.src = src;
       video.removeAttribute('src');
       video.preload = 'none';
+      video.muted = true;
+      video.playsInline = true;
 
       function revealVideo() {
+        if (video.classList.contains('is-playing')) return;
         video.classList.add('is-playing');
         if (posterImg) posterImg.classList.add('is-hidden');
       }
 
-      video.addEventListener('playing', revealVideo, { once: true });
+      function startPlayback() {
+        const playPromise = video.play();
+        if (!playPromise || !playPromise.then) {
+          revealVideo();
+          return;
+        }
 
-      function loadVideo() {
-        if (!video.dataset.src || video.getAttribute('src')) return;
-        video.src = video.dataset.src;
-        video.load();
-        video.play().catch(function () {});
+        playPromise.then(function () {
+          if (video.readyState >= 2 && video.currentTime > 0) {
+            revealVideo();
+            return;
+          }
+
+          video.addEventListener('timeupdate', function onFrame() {
+            if (video.currentTime <= 0) return;
+            video.removeEventListener('timeupdate', onFrame);
+            revealVideo();
+          });
+        }).catch(function () {
+          /* poster stays visible if autoplay is blocked */
+        });
       }
 
-      if (index < 3) {
+      function loadVideo() {
+        if (!video.dataset.src || video.getAttribute('src') || video.dataset.loading === 'true') return;
+        video.dataset.loading = 'true';
+        video.preload = 'auto';
+        video.src = video.dataset.src;
+
+        let started = false;
+        let fallbackTimer;
+
+        function cleanupReadyListeners() {
+          video.removeEventListener('canplaythrough', onVideoReady);
+          video.removeEventListener('loadeddata', onVideoReady);
+          video.removeEventListener('canplay', onVideoReady);
+          window.clearTimeout(fallbackTimer);
+        }
+
+        function onVideoReady() {
+          if (started) return;
+          if (video.readyState < MIN_READY_STATE) return;
+          started = true;
+          cleanupReadyListeners();
+          startPlayback();
+        }
+
+        video.addEventListener('canplaythrough', onVideoReady);
+        video.addEventListener('loadeddata', onVideoReady);
+        video.addEventListener('canplay', onVideoReady);
+        video.addEventListener('error', cleanupReadyListeners, { once: true });
+
+        fallbackTimer = window.setTimeout(function () {
+          if (video.readyState >= MIN_READY_STATE) onVideoReady();
+        }, READY_TIMEOUT_MS);
+
+        video.load();
+
+        if (video.readyState >= MIN_READY_STATE) {
+          onVideoReady();
+        }
+      }
+
+      if (index < IMMEDIATE_LOAD_COUNT) {
         loadVideo();
         return;
       }

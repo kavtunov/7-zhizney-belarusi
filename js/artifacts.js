@@ -77,26 +77,6 @@
     return countCollected() >= TOTAL_ARTIFACTS;
   }
 
-  function updateHud(container) {
-    if (!container) return;
-    const collected = loadData();
-
-    Object.keys(ARTIFACTS).forEach(function (id) {
-      const item = container.querySelector('[data-artifact-id="' + id + '"]');
-      if (!item) return;
-      if (collected[id]) item.classList.add('collected');
-      else item.classList.remove('collected');
-    });
-
-    const label = container.querySelector('.hud-label');
-    if (label) {
-      const count = countCollected();
-      label.textContent = window.Belarus7I18n
-        ? window.Belarus7I18n.hudLabel(count, TOTAL_ARTIFACTS)
-        : 'Следы времени · ' + count + ' / ' + TOTAL_ARTIFACTS;
-    }
-  }
-
   function showToast(name) {
     const oldToast = document.querySelector('.toast');
     if (oldToast) oldToast.remove();
@@ -137,8 +117,6 @@
       if (window.Belarus7UI && window.Belarus7UI.playCollectSound) {
         window.Belarus7UI.playCollectSound();
       }
-
-      updateHud(document.querySelector('.hud'));
     });
   }
 
@@ -206,7 +184,6 @@
     collect: collect,
     countCollected: countCollected,
     allCollected: allCollected,
-    renderHud: updateHud,
     initPickup: initPickup,
     initEraNav: initEraNavigation,
     initCollectionPage: initCollectionPage,
@@ -218,7 +195,6 @@
       localStorage.removeItem(STORAGE_KEY);
     }
 
-    updateHud(document.querySelector('.hud'));
     document.querySelectorAll('.pickup').forEach(initPickup);
     initEraNavigation(document.body.dataset.page);
     initCollectionPage();

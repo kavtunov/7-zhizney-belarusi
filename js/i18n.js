@@ -51,9 +51,6 @@
     t: t,
     artifactLabel: function (id) {
       return t('artifacts.' + id);
-    },
-    hudLabel: function (count, total) {
-      return t('traces') + ' · ' + count + ' / ' + total;
     }
   };
 })();
