@@ -49,14 +49,6 @@
     }
   }
 
-  function isReloadNavigation() {
-    const navEntries = performance.getEntriesByType('navigation');
-    if (navEntries.length > 0) {
-      return navEntries[0].type === 'reload';
-    }
-    return performance.navigation && performance.navigation.type === 1;
-  }
-
   function isCollected(id) {
     return !!loadData()[id];
   }
@@ -191,10 +183,6 @@
   };
 
   document.addEventListener('DOMContentLoaded', function () {
-    if (isReloadNavigation()) {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-
     document.querySelectorAll('.pickup').forEach(initPickup);
     initEraNavigation(document.body.dataset.page);
     initCollectionPage();
