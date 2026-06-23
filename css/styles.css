@@ -41,7 +41,15 @@ a {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #5c7d96;
+  color: #2f4a35;
+  font-weight: 600;
+}
+
+.hero .eyebrow,
+.home-content .eyebrow {
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(255, 255, 255, 0.75);
 }
 
 .byline {
@@ -272,7 +280,7 @@ a.lang-toggle-btn:hover {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(92, 125, 150, 0.3), transparent 70%);
+  background: radial-gradient(circle, rgba(74, 92, 63, 0.3), transparent 70%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,7 +302,7 @@ a.lang-toggle-btn:hover {
   position: absolute;
   top: 24px;
   font-size: 24px;
-  color: #5c7d96;
+  color: #4a5c3f;
 }
 
 @keyframes pulse {
@@ -341,10 +349,10 @@ a.lang-toggle-btn:hover {
 }
 
 .era-link:hover {
-  border-color: #5c7d96;
-  background: #f0f4f8;
+  border-color: #4a5c3f;
+  background: #ebe8df;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(92, 125, 150, 0.18);
+  box-shadow: 0 8px 28px rgba(74, 92, 63, 0.18);
 }
 
 .era-link span:first-child {
@@ -431,13 +439,13 @@ a.lang-toggle-btn:hover {
   z-index: 300;
   padding: 24px 32px;
   background: #fff;
-  border: 2px solid #5c7d96;
+  border: 2px solid #4a5c3f;
   border-radius: 20px;
   text-align: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s, transform 0.4s;
-  box-shadow: 0 16px 48px rgba(92, 125, 150, 0.25);
+  box-shadow: 0 16px 48px rgba(74, 92, 63, 0.18);
 }
 
 .toast.show {
@@ -560,12 +568,12 @@ main.section .prose {
   display: block;
   width: 44px;
   height: 1px;
-  background: rgba(182, 221, 255, 0.92);
+  background: rgba(212, 196, 168, 0.92);
   margin-bottom: 18px;
 }
 
 .era-content .eyebrow {
-  color: #d6ecff;
+  color: #e8dcc4;
   font-size: 10px;
   letter-spacing: 0.2em;
   margin-bottom: 14px;
@@ -573,7 +581,7 @@ main.section .prose {
 }
 
 .era-content .era-title {
-  color: #eaf4ff;
+  color: #f8f4eb;
   margin-bottom: 12px;
   letter-spacing: -0.03em;
   text-shadow:
@@ -582,7 +590,7 @@ main.section .prose {
 }
 
 .era-content .era-dates {
-  color: #c9e6ff;
+  color: #ddd0b8;
   font-size: 11px;
   letter-spacing: 0.13em;
   margin-bottom: 14px;
@@ -590,7 +598,7 @@ main.section .prose {
 }
 
 .era-content .era-deck {
-  color: #e1f0ff;
+  color: #efe9dc;
   font-size: 17px;
   line-height: 1.6;
   font-style: normal;
@@ -746,6 +754,28 @@ main.section .prose {
   visibility: hidden;
 }
 
+.time-card.is-video-loading .card-poster::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: rgba(36, 49, 25, 0.75);
+  border-radius: 50%;
+  animation: card-video-spin 0.75s linear infinite;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.55);
+}
+
+@keyframes card-video-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .card-media {
   z-index: 0;
   opacity: 0;
@@ -805,8 +835,8 @@ main.section .prose {
 }
 
 .collect-item.unlocked {
-  border-color: #5c7d96;
-  box-shadow: 0 12px 40px rgba(92, 125, 150, 0.25);
+  border-color: #4a5c3f;
+  box-shadow: 0 12px 40px rgba(74, 92, 63, 0.18);
   transform: translateY(-4px);
 }
 
@@ -838,7 +868,7 @@ main.section .prose {
   isolation: isolate;
   padding-top: 96px;
   padding-bottom: 64px;
-  background: #e8eef0;
+  background: #ebe8e0;
 }
 
 .hero-bg {
@@ -1042,7 +1072,7 @@ main.section .prose {
 .mechanic {
   padding: 32px;
   border-radius: 20px;
-  background: linear-gradient(135deg, #f0f9ee, #eef3f7);
+  background: linear-gradient(135deg, #f0f9ee, #eef4e8);
   box-shadow: 0 8px 32px rgba(139, 207, 123, 0.12);
 }
 
@@ -1051,7 +1081,7 @@ main.section .prose {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #5c7d96;
+  color: #4a5c3f;
   margin-bottom: 12px;
 }
 
@@ -1059,7 +1089,7 @@ main.section .prose {
   text-align: center;
   padding-top: 128px;
   padding-bottom: 96px;
-  background: linear-gradient(180deg, transparent, #f5f3ff);
+  background: linear-gradient(180deg, transparent, #f4f1e8);
   border-radius: 24px;
 }
 
@@ -1153,7 +1183,7 @@ main.section .prose {
 }
 
 .collect-hero .eyebrow {
-  color: #5f7a57;
+  color: #2f4a35;
   text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
 }
 
@@ -1179,7 +1209,7 @@ main.section .prose {
   padding: 64px 32px 96px;
   border-top: 1px solid rgba(36, 49, 25, 0.08);
   margin-top: 48px;
-  background: linear-gradient(135deg, #f3f9f1, #f3f1ff);
+  background: linear-gradient(135deg, #f3f9f1, #f4f1e8);
   border-radius: 24px;
 }
 
@@ -1240,7 +1270,7 @@ main.section .prose {
 .memorial {
   max-width: 100%;
   width: 100%;
-  border-left: 2px solid #5c7d96;
+  border-left: 2px solid #4a5c3f;
   padding-left: 24px;
   margin-top: 32px;
   margin-bottom: 32px;
@@ -1296,7 +1326,7 @@ main.section .prose {
   bottom: 0;
   background-image:
     linear-gradient(rgba(139, 207, 123, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(92, 125, 150, 0.1) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(74, 92, 63, 0.1) 1px, transparent 1px);
   background-size: 60px 60px;
   opacity: 0.5;
 }
@@ -1310,7 +1340,7 @@ main.section .prose {
   background:
     radial-gradient(ellipse at 30% 50%, rgba(199, 125, 255, 0.25), transparent 60%),
     radial-gradient(ellipse at 70% 40%, rgba(0, 212, 255, 0.2), transparent 55%),
-    radial-gradient(ellipse at 50% 60%, rgba(92, 125, 150, 0.15), transparent 50%);
+    radial-gradient(ellipse at 50% 60%, rgba(74, 92, 63, 0.15), transparent 50%);
   animation: aurora-shift 8s ease-in-out infinite alternate;
 }
 
@@ -1763,8 +1793,8 @@ main.section .prose {
   margin-bottom: 8px;
   padding: 24px 24px 20px;
   border-radius: 20px;
-  border: 1px solid rgba(92, 125, 150, 0.16);
-  background: linear-gradient(160deg, #fafcfd 0%, #f5f9f6 100%);
+  border: 1px solid rgba(74, 92, 63, 0.2);
+  background: linear-gradient(160deg, #faf9f5 0%, #f5f7f2 100%);
   box-shadow: 0 10px 32px rgba(36, 49, 25, 0.06);
 }
 
@@ -1874,8 +1904,8 @@ main.section .prose {
   margin-bottom: 40px;
   padding: 28px 32px;
   border-radius: 18px;
-  border: 1px solid rgba(92, 125, 150, 0.2);
-  background: linear-gradient(135deg, #f4f8fb, #f0f9ee);
+  border: 1px solid rgba(74, 92, 63, 0.2);
+  background: linear-gradient(135deg, #f4f1e8, #f0f9ee);
 }
 
 .facts-title {
@@ -1883,7 +1913,7 @@ main.section .prose {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #5c7d96;
+  color: #4a5c3f;
   margin-bottom: 16px;
 }
 
@@ -1928,7 +1958,7 @@ main.section .prose {
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #5c7d96;
+  color: #4a5c3f;
   margin-bottom: 8px;
   font-weight: 600;
 }
@@ -1963,7 +1993,7 @@ main.section .prose {
 
 .back-top:hover {
   transform: translateY(-2px);
-  background: #f0f4f8;
+  background: #ebe8df;
 }
 
 .about-page {
@@ -1980,8 +2010,8 @@ main.section .prose {
   padding: 40px 36px;
   border-radius: 20px;
   text-align: center;
-  border: 1px solid rgba(92, 125, 150, 0.22);
-  background: linear-gradient(135deg, #f4f8fb 0%, #eef6f0 100%);
+  border: 1px solid rgba(74, 92, 63, 0.2);
+  background: linear-gradient(135deg, #f4f1e8 0%, #eef6f0 100%);
   box-shadow: 0 10px 32px rgba(36, 49, 25, 0.08);
 }
 
@@ -2044,7 +2074,7 @@ main.section .prose {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #5c7d96;
+  color: #4a5c3f;
   margin-bottom: 10px;
 }
 

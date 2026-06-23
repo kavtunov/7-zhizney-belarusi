@@ -4,16 +4,17 @@
   const IS_FILE_PROTOCOL = window.location.protocol === 'file:';
   const MIN_READY_STATE = IS_FILE_PROTOCOL ? 3 : 4;
   const READY_TIMEOUT_MS = IS_FILE_PROTOCOL ? 5000 : 12000;
-  const IMMEDIATE_LOAD_COUNT = IS_FILE_PROTOCOL ? 99 : 3;
+  const IMMEDIATE_LOAD_COUNT = IS_FILE_PROTOCOL ? 99 : 0;
 
   function initCardVideos() {
     const videos = document.querySelectorAll('.time-grid .card-media');
     if (!videos.length) return;
 
     videos.forEach(function (video, index) {
-      const src = video.getAttribute('src');
+      const src = video.getAttribute('src') || video.dataset.src;
       if (!src) return;
 
+      const card = video.closest('.time-card');
       const poster = video.previousElementSibling;
       const posterImg = poster && poster.classList.contains('card-poster') ? poster : null;
 
@@ -23,13 +24,20 @@
 
       video.dataset.src = src;
       video.removeAttribute('src');
+      video.setAttribute('loading', 'lazy');
       video.preload = 'none';
       video.muted = true;
       video.playsInline = true;
+      video.loop = true;
+
+      function setLoadingState(isLoading) {
+        if (card) card.classList.toggle('is-video-loading', isLoading);
+      }
 
       function revealVideo() {
         if (video.classList.contains('is-playing')) return;
         video.classList.add('is-playing');
+        setLoadingState(false);
         if (posterImg) posterImg.classList.add('is-hidden');
       }
 
@@ -52,6 +60,7 @@
             revealVideo();
           });
         }).catch(function () {
+          setLoadingState(false);
           /* poster stays visible if autoplay is blocked */
         });
       }
@@ -59,6 +68,7 @@
       function loadVideo() {
         if (!video.dataset.src || video.getAttribute('src') || video.dataset.loading === 'true') return;
         video.dataset.loading = 'true';
+        setLoadingState(true);
         video.preload = 'auto';
         video.src = video.dataset.src;
 
@@ -83,7 +93,10 @@
         video.addEventListener('canplaythrough', onVideoReady);
         video.addEventListener('loadeddata', onVideoReady);
         video.addEventListener('canplay', onVideoReady);
-        video.addEventListener('error', cleanupReadyListeners, { once: true });
+        video.addEventListener('error', function () {
+          cleanupReadyListeners();
+          setLoadingState(false);
+        }, { once: true });
 
         fallbackTimer = window.setTimeout(function () {
           if (video.readyState >= MIN_READY_STATE) onVideoReady();
